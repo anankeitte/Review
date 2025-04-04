@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit the review</title>
+    <link rel="stylesheet" href="/styles/detail.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="reviewForm" action="/detail/<%= book.id %>/review/<%= review._id %>/edit" method="POST">
+        <div class="stars">
+          <span class="star <%= review.rating >= 5 ? 'selected' : '' %>" data-rating="<%= 5 %>">★</span>
+          <span class="star <%= review.rating >= 4 ? 'selected' : '' %>" data-rating="<%= 4 %>">★</span>
+          <span class="star <%= review.rating >= 3 ? 'selected' : '' %>" data-rating="<%= 3 %>">★</span>
+          <span class="star <%= review.rating >= 2 ? 'selected' : '' %>" data-rating="<%= 2 %>">★</span>
+          <span class="star <%= review.rating >= 1 ? 'selected' : '' %>" data-rating="<%= 1 %>">★</span>
+        </div>
+
+        <div class="forms">
+          <textarea name="review" required maxlength="500" rows="4"><%= review.text %></textarea>
+          <input type="hidden" name="rating" id="selectedRating" value="0" />
+        </div>
+
+        <button type="submit" class="submit-btn">Update Review</button>
+      </form>
+    </div>
+    <script>
+      const stars = document.querySelectorAll(".star")
+      let selectedRating = 0
+
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          selectedRating = star.getAttribute("data-rating")
+          console.log("Selected Rating:", selectedRating)
+
+          stars.forEach((s) => {
+            s.classList.remove("selected")
+          })
+
+          //I am fixing index issue by using array length
+          for (let index = stars.length - selectedRating; index < stars.length; index++) {
+            stars[index].classList.add("selected")
+          }
+
+          stars.forEach((star) => {
+            if (!star.classList.contains("selected")) {
+              star.style.color = "#ccc" // Reseting unselected stars
+            } else {
+              star.style.color = "#ffcc00" // Applying selected color
+            }
+          })
+        })
+      })
+    </script>
+    <script src="/javascripts/details.js"></script>
+  </body>
+</html>

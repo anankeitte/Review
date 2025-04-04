@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book List</title>
+    <link rel="stylesheet" href="/styles/mybooks.css" />
+  </head>
+  <body>
+    <%- include("./header.ejs") %>
+    <!-- sectino adding books -->
+    <section>
+      <div class="container">
+        <div>
+          <h2>Add Book to Review</h2>
+          <% if (error) { %>
+          <p class="error"><%= error %></p>
+          <% } %> <% if (success) { %>
+          <p class="success"><%= success %></p>
+          <% } %>
+          <div class="form-container">
+            <form class="form" method="post" action="addbooks">
+              <div class="input-group">
+                <label for="bookimage">Image Link</label>
+                <input type="text" name="bookimage" id="bookimage" placeholder="" required />
+              </div>
+              <div class="input-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" placeholder="" required maxlength="100" />
+              </div>
+              <div class="input-group">
+                <label for="authorname">Author Name</label>
+                <input type="text" name="authorname" id="authorname" placeholder="" required />
+              </div>
+              <div class="input-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" rows="3" maxlength="1000" minlength="10" required></textarea>
+              </div>
+              <button class="btn-book">Add Book</button>
+            </form>
+          </div>
+          <!--  -->
+        </div>
+        <!--  -->
+      </div>
+    </section>
+
+    <!-- my added books -->
+    <section>
+      <div class="container">
+        <h2>My Added Books</h2>
+        <div class="flex-books">
+          <!--  -->
+          <% userBooks.forEach(book => { %>
+          <div class="card-mybooks">
+            <div class="card-img">
+              <img src="<%= book.image %>" alt="" />
+            </div>
+            <div class="card-action-books">
+              <h3 class="book-title"><%= book.title %></h3>
+              <span class="author"><%= book.author %></span>
+              <div class="actions">
+                <a href="/detail/<%= book._id %>" class="action-btn-book view-book-btn">View</a>
+
+                <a href="/addbooks/<%= book._id %>/edit?allow=true" class="action-btn-book edit-book-btn">Edit</a>
+
+                <form action="addbooks/delete-book/<%= book._id %>" method="POST" style="display: inline">
+                  <button type="submit" class="action-btn-book delete-book-btn">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+          <!--  -->
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

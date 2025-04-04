@@ -1,0 +1,340 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
+body {
+  background: #f5f6f5;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  width: 100%;
+  padding: 40px 0;
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav > ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+li,
+a {
+  text-decoration: none;
+  list-style: none;
+}
+.logo {
+  font-size: 24px;
+  font-weight: 600;
+  color: #463c74;
+}
+.logo > span {
+  color: #b4d51e;
+}
+.nav-links > li > a {
+  color: #c3c0d1;
+  font-weight: 600;
+}
+/* sectinos */
+section {
+  margin: 60px 0;
+}
+.flex-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.detail-img {
+  width: 50%;
+}
+.detail-img > img {
+  height: 480px;
+}
+.flex-left-detail {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  gap: 40px;
+}
+.flex-left-detail > h2 {
+  font-size: 42px;
+  color: #463c74;
+  font-weight: 600;
+}
+.detail-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #b4d51e;
+  border-radius: 9999px;
+  background-color: #b4d51e;
+  padding: 10px 24px;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
+  outline: 0;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+.detail-btn:hover {
+  background-color: transparent;
+  color: #b4d51e;
+}
+
+/* Reviewing part */
+
+.title-review {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.stars {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+  gap: 5px;
+}
+.star {
+  font-size: 52px;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+}
+.star:hover,
+.star:hover ~ .star,
+.star.selected,
+.star.selected ~ .star {
+  color: #ffcc00;
+}
+.forms > textarea {
+  width: 600px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  resize: none;
+  height: 96px;
+  border: 1px solid #414141;
+  background-color: transparent;
+}
+.submit-btn {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: flex-start;
+  color: #000;
+  font-weight: 500;
+  min-width: 120px;
+  font-size: 16px;
+  background: #b4d51e;
+  border: 2px solid #414141;
+  padding: 12px 16px;
+  margin-top: 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease-in;
+}
+.submit-btn:hover {
+  background: transparent;
+  border-color: #b4d51e;
+  color: #b4d51e;
+}
+/* review cars */
+.flex-reviews {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  gap: 20px;
+  width: 100%;
+}
+.review-card {
+  background: #fff;
+  width: 620px;
+  padding: 24px;
+  border-radius: 24px;
+}
+.review-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 24px;
+}
+.review-card-header > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.review-card-header img {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+}
+.review-text {
+  padding-top: 24px;
+  border-top: 1px solid #edeff5;
+}
+.reviews-stars {
+  font-size: 24px;
+}
+
+.action-btn-book {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 40px;
+  border: 2px solid #000;
+  background-color: rgba(167, 139, 250, 1);
+  color: #000;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.3s ease-in;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.delete-book-btn {
+  background: #ff3636;
+}
+.edit-book-btn:hover {
+  background: transparent;
+  color: #463c74;
+  border-color: #463c74;
+}
+.delete-book-btn:hover {
+  background: transparent;
+  color: #ff3636;
+  border-color: #ff3636;
+}
+
+/*flash message style*/
+.flash-message {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.flash-error {
+  color: #ff3636;
+}
+
+.flash-success {
+  color: #155724;
+}
+
+/*footer  */
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 24px 0;
+  background: #fbf4e2;
+}
+
+/* ====================== Breakpoint Responsiveness =========================== */
+@media only screen and (max-width: 1200px) {
+  .container,
+  nav {
+    max-width: 992px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .container,
+  nav {
+    max-width: 768px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container,
+  nav {
+    max-width: 576px;
+  }
+  .flex-detail {
+    flex-direction: column;
+  }
+  .detail-img {
+    width: 100%;
+  }
+  .detail-img > img {
+    height: 480px;
+  }
+  .flex-left-detail {
+    padding-top: 20px;
+    width: 100%;
+  }
+  .flex-left-detail > h2 {
+    font-size: 36px;
+  }
+  .flex-left-detail > p {
+    font-size: 14px;
+  }
+  #reviewForm {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    width: 100%;
+  }
+  .forms > textarea,
+  .rating-form,
+  .forms {
+    width: 100%;
+  }
+  /* review cards */
+  .review-card {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  section {
+    margin: 40px 0;
+  }
+  .container,
+  nav {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+  .detail-img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .flex-left-detail {
+    padding-top: 20px;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  .forms > textarea,
+  .rating-form,
+  .forms {
+    width: 100%;
+  }
+  /* review cards */
+  .review-card {
+    width: 100%;
+  }
+  .actions {
+    padding-top: 20px;
+  }
+}

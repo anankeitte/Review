@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log In to ReviewBook</title>
+    <link rel="stylesheet" href="/styles/signup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login">
+        <a href="/" class="logo">Review<span>Book</span></a>
+        <!-- form -->
+        <form class="form" method="post" action="login">
+          <p class="title">Log in</p>
+          <% if (loginError) { %>
+          <p class="error"><%= loginError %></p>
+          <% } %>
+          <p class="message">Welcome Back</p>
+          <label>
+            <input required="" placeholder="" type="email" class="input" name="email" />
+            <span>Email</span>
+          </label>
+
+          <label>
+            <input required="" placeholder="" type="password" class="input" minlength="8" name="password" />
+            <span>Password</span>
+          </label>
+
+          <button class="submit">Submit</button>
+          <p class="signin">Don't have an account? <a href="/signup">SignUp</a></p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details Page</title>
+    <link rel="stylesheet" href="/styles/detail.css" />
+  </head>
+  <body>
+    <%- include("./header.ejs") %>
+    <!--  -->
+    <% if (error) { %>
+    <div class="flash-message flash-error"><%= error %></div>
+    <% } %>
+    <!--  -->
+    <% if (success) { %>
+    <div class="flash-message flash-success"><%= success %></div>
+    <% } %>
+
+    <main>
+      <!-- details of Book /images/Book 1.jpg-->
+      <section>
+        <div class="container">
+          <div class="flex-detail">
+            <div class="detail-img">
+              <img src="<%= book.image %>" alt="" />
+            </div>
+            <div class="flex-left-detail">
+              <h2><%= book.title %></h2>
+              <p><%= book.description %></p>
+              <button class="detail-btn">Download</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- section testimonials -->
+      <section>
+        <div class="container">
+          <% if (user) { %>
+          <form id="reviewForm" action="/detail/<%= book._id %>/review" method="POST">
+            <div class="title-review">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path
+                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+                />
+              </svg>
+              <h2>Write a Review</h2>
+            </div>
+
+            <div class="rating-form">
+              <div class="stars">
+                <span class="star" data-rating="5">★</span>
+                <span class="star" data-rating="4">★</span>
+                <span class="star" data-rating="3">★</span>
+                <span class="star" data-rating="2">★</span>
+                <span class="star" data-rating="1">★</span>
+              </div>
+
+              <div class="forms">
+                <textarea required name="review" id="reviewText" maxlength="500" rows="4"></textarea>
+                <input type="hidden" name="rating" id="selectedRating" value="0" />
+              </div>
+            </div>
+
+            <!-- Submit review -->
+            <button type="submit" class="submit-btn">Submit</button>
+          </form>
+
+          <% } %>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <h2>Reviews</h2>
+          <div class="flex-reviews">
+            <% if (book.reviews.length > 0) { %> <% book.reviews.forEach(review => { %>
+            <div class="review-card">
+              <div class="review-card-header">
+                <div>
+                  <img src="/images/user.jpg" alt="" />
+                  <div>
+                    <h3><%= review.user.fullName %></h3>
+                    <span style="color: #c3c0d1"><%= review.user.occupation %></span>
+                  </div>
+                </div>
+                <div class="reviews-stars" data-rating="<%= review.rating %>"></div>
+              </div>
+              <div class="review-text">
+                <p><%= review.text %></p>
+              </div>
+              <% if (user && user._id.toString() === review.user._id.toString()) { %>
+              <div class="actions">
+                <a href="/detail/<%= book.id %>/review/<%= review._id %>/edit?allow=true" class="action-btn-book edit-book-btn">Edit</a>
+                <form
+                  action="/detail/<%= book._id %>/review/<%= review._id %>/delete"
+                  method="POST"
+                  style="display: inline"
+                  onsubmit="return confirm('Are you sure you want to delete this review?');"
+                >
+                  <button type="submit" class="action-btn-book delete-book-btn">Delete</button>
+                </form>
+              </div>
+              <% } %>
+            </div>
+            <% }) %> <% } else { %>
+            <p>No reviews yet.</p>
+            <% } %>
+            <!-- card end -->
+          </div>
+          <!-- flex box end -->
+        </div>
+      </section>
+    </main>
+
+    <%- include("./footer.ejs") %>
+    <script>
+      const stars = document.querySelectorAll(".star")
+      let selectedRating = 0
+
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          selectedRating = star.getAttribute("data-rating")
+          console.log("Selected Rating:", selectedRating)
+
+          stars.forEach((s) => {
+            s.classList.remove("selected")
+          })
+
+          // Fixing index issue by using array length
+          for (let index = stars.length - selectedRating; index < stars.length; index++) {
+            stars[index].classList.add("selected")
+          }
+
+          stars.forEach((star) => {
+            if (!star.classList.contains("selected")) {
+              star.style.color = "#ccc" // Reset unselected stars
+            } else {
+              star.style.color = "#ffcc00" // Apply selected color
+            }
+          })
+        })
+      })
+    </script>
+    <script src="/javascripts/details.js"></script>
+  </body>
+</html>
